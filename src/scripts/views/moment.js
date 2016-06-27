@@ -3,17 +3,17 @@ var tplMoment = require('../templates/moment.string');
 var util = require('../utils/fn.js');
 
 SPA.defineView('moment',{
-	
+
 	html :tplMoment ,
-	
+
 	plugins : ['delegated',{
 		name: 'avalon' ,
 		options: function(vm) {
 			vm.livelist = [] ;
 		}
-		
+
 	}] ,
-	
+
 	init :{
 		mySwiper : null ,
 		vm :null,
@@ -23,7 +23,7 @@ SPA.defineView('moment',{
 			for(var i=0;i<Math.ceil(arr.length/2);i++){
 				tempArr[i] = [] ;
 				tempArr[i].push(arr[2*i]) ;
-				tempArr[i].push(arr[2*i+1]) ;	
+				tempArr[i].push(arr[2*i+1]) ;
 			}
 			return tempArr ;
 		}
@@ -34,15 +34,15 @@ SPA.defineView('moment',{
         param: data
       });
     }
-		
-		
+
+
 	},
 	bindEvents: {
 		'beforeShow':function(){
 			var that = this ;
 			that.vm = that.getVM() ;
 			$.ajax({
-				url :'/api/getLivelist.php' ,
+				url :'/mobiletask/mock/mock.json' ,
 			//	  /api/getLivelist.php
 			//    /mobiletask/mock/mock.json
 				type : 'get' ,
@@ -55,13 +55,13 @@ SPA.defineView('moment',{
 			//	vm.downloadmore = that.formatData(rs.data) ;
 			  that.livelistArray = rs.data;
 		      that.vm.livelist = that.formatData(rs.data)  ;
-					
-				}	
+
+				}
 			})
 		},
-		
-		
-		
+
+
+
 		'show': function () {
       var that = this;
       // 下拉刷新，上拉加载更多
@@ -95,7 +95,7 @@ SPA.defineView('moment',{
               // ajax下拉刷新数据
 
               $.ajax({
-                url: '/api/getLivelist.php',
+                url: '/mobiletask/mock/livelist-refresh.json',
                 data: {
                   rtype: 'refresh'
                 },
@@ -124,7 +124,7 @@ SPA.defineView('moment',{
               // ajax上拉加载数据
 
               $.ajax({
-                url: '/api/getLivelist.php',
+                url: '/mobiletask/mock/livelist-more.json',
                 data: {
                   rtype: 'more'
                 },
@@ -146,26 +146,3 @@ SPA.defineView('moment',{
 
 	}
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

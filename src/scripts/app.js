@@ -13,7 +13,7 @@ require('./views/detail.js');
 require('./views/my.js');
 require('./views/module.js');
 require('./views/market.js');
-require('./views/test.js');
+
 
 
 
@@ -23,16 +23,5 @@ require('./views/test.js');
 //SPA設置,定義首先進入的视图
 
 SPA.config({
-	indexView :'guide'  
+	indexView :'guide'
 });
-
-
-
-
-
-
-
-
-
-
-

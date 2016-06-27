@@ -15,7 +15,7 @@ SPA.defineView('market',{
 			vm.livelist = [] ;
 		}
 	}] ,
-  
+
   init: {
     vm: null,
     livelistArray: [],
@@ -30,25 +30,25 @@ SPA.defineView('market',{
       return tempArr;
     }
   },
-  
+
 	 // 绑定tab 事件
   bindActions: {
   	'back': function (){
       this.hide();
     },
-    
+
     'market-tabs': function (e, data) {
       this.homeHotSwiper.slideTo($(e.el).index());
-      
+
     }
   },
-  
-  bindEvents: {  
+
+  bindEvents: {
     'beforeShow':function(){
 			var that = this ;
 			that.vm = that.getVM() ;
 			$.ajax({
-				url :'/api/getLivelist.php' ,
+				url :'/mobiletask/mock/mock.json' ,
 			//	  /api/getLivelist.php
 			//    /mobiletask/mock/mock.json
 				type : 'get' ,
@@ -61,15 +61,15 @@ SPA.defineView('market',{
 			//	vm.downloadmore = that.formatData(rs.data) ;
 			  that.livelistArray = rs.data;
 				that.vm.livelist = that.formatData(rs.data)  ;
-					
-				}	
+
+				}
 			})
 		},
-		
+
 	'show': function () {
       var that = this;
       // 下拉刷新，上拉加载更多
-      
+
       that.homeHotSwiper = new Swiper('#home-hot-swiper', {
         loop: false,
         onSlideChangeStart: function (swiper) {
@@ -80,7 +80,7 @@ SPA.defineView('market',{
         // freeMode : true,
         // freeModeMomentum : false
       });
-      
+
       var scrollSize = 40;
       var myScroll = this.widgets.homeHotScroll;
       myScroll.scrollBy(0, -scrollSize);
@@ -111,7 +111,7 @@ SPA.defineView('market',{
               // ajax下拉刷新数据
 
               $.ajax({
-                url: '/api/getLivelist.php',
+                url: '/mobiletask/mock/live-list-refresh.json',
                 data: {
                   rtype: 'refresh'
                 },
@@ -140,7 +140,7 @@ SPA.defineView('market',{
               // ajax上拉加载数据
 
               $.ajax({
-                url: '/api/getLivelist.php',
+                url: '/mobiletask/mock/livelist-more.json',
                 data: {
                   rtype: 'more'
                 },
@@ -161,7 +161,7 @@ SPA.defineView('market',{
     }
 
 	}
-    
-    
-     
+
+
+
 });
